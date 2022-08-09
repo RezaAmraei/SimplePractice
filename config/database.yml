@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  password: <%= AppConfig.db.password %>
+  pool: <%= AppConfig.db.pool %>
+  username: <%= AppConfig.db.username %>
+<% if AppConfig.db.host.present? %>
+  host: <%= AppConfig.db.host %>
+<% end %>
+<% if AppConfig.db.port.present? %>
+  port: <%= AppConfig.db.port %>
+<% end %>
+
+development:
+  <<: *default
+  database: <%= AppConfig.db.database %>_development
+
+test:
+  <<: *default
+  database: <%= AppConfig.db.database %>_test
+
+production:
+  encoding: unicode
+  pool: <%= AppConfig.db.pool %>

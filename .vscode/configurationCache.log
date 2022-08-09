@@ -1,0 +1,1 @@
+{"buildTargets":[".PHONY","bash","build","bundle","chown","console","dbcreate","dbdrop","dbmigrate","dbseed","default","down","help","logs","prune","routes","test","up","zip"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

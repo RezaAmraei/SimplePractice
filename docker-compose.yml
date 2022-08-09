@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: 'db_user'
+      POSTGRES_PASSWORD: 'password'
+    volumes:
+      - 'db:/var/lib/postgresql/data'
+
+  app:
+    image: simplepractice_test:development
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    # expose ports
+    ports:
+      - "3000:3000"
+
+volumes:
+  db:
