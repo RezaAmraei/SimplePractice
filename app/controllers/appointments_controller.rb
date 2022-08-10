@@ -35,6 +35,22 @@ class AppointmentsController < ApplicationController
           appointment["start_time"].to_f > DateTime.now.to_f
         }
         render json: future_appointments
+      elsif params[:length] && params[:page]
+        range_of_appointments = []
+        #created these variables just to make the if condition more readable
+        length = params[:length].to_i
+        page = params[:page].to_i
+        
+        all_appointments.each_with_index do |appointment,index|
+          if index <= ((page * length) - 1) && index >= (((page * length) - length) - 1 )
+            range_of_appointments.push(appointment)
+          end
+        end
+        render json: {
+          "page" => page,
+          "length" => length,
+          "appointments" => range_of_appointments
+        }
       else
         render json: all_appointments
       end
@@ -71,16 +87,24 @@ class AppointmentsController < ApplicationController
   end
   
   def create 
-    patients = ActiveRecord::Base.connection.execute("SELECT * FROM patients")
+    patients = Patient.all
 
-    finder = patients.select { |patient|  patient["name"] == params[:patient]}
-    # patient_id = finder["id"]
-    ActiveRecord::Base.connection.execute("INSERT INTO appointments (doctor_id, patient_id, start_time, duration_in_minutes, created_at , updated_at) VALUES ( #{finder[0]["doctor_id"]} , #{finder[0]["id"]}, '2069-10-31T22:25:06.000Z', #{params[:duration_in_minutes]}, NOW(), NOW());")
+    finder = patients.select { |patient|  patient["name"] == params[:patient_name]}
 
-    created_appointment = {
-      "message" => "Appointment for #{params[:patient]} was created!"
-    }
-    render json: created_appointment
+    appointment = Appointment.new(doctor_id: params[:doctor_id], patient_id: finder[0]["id"], start_time: params[:start_time], duration_in_minutes: params[:duration_in_minutes])
+    
+    if appointment.save
+      render json: appointment, status: :created
+    else
+      render json: appointment.errors, status: :unproccessable_entity
+    end
+  end
+
+
+  private
+
+  def appointment_params
+    params.require(:appointment).permit(:doctor_id, :patient_name, :start_time, :duration_in_minutes)
   end
 end
 
