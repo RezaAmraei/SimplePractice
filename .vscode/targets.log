@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Aug 08 09:59:52 2022
+# Make data base, printed on Tue Aug 09 14:01:51 2022
 
 # Variables
 
@@ -41,7 +41,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_20136_TLCFKFBWSJNULIHC
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_29540_SJJHZGCCXGBWFEVY
 # environment
 VS160COMCOMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\
 # environment
@@ -93,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 20136
+VSCODE_PID = 29540
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -215,9 +215,9 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 
 # Directories
 
-# . (key c:/Users/Amrae/Desktop/simplepractice-interview-test, mtime 1659977992): 27 files, no impossibilities.
+# . (key c:/Users/Amrae/Desktop/simplepractice-interview-test, mtime 1660006767): 28 files, no impossibilities.
 
-# 27 files, no impossibilities in 1 directories.
+# 28 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -385,12 +385,12 @@ chown:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 49 / storage = 353 B / avg = 7 B
-# current buf: size = 8174 B / used = 353 B / count = 49 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 50 / storage = 358 B / avg = 7 B
+# current buf: size = 8174 B / used = 358 B / count = 50 / avg = 7 B
 
-# strcache performance: lookups = 75 / hit rate = 34%
+# strcache performance: lookups = 76 / hit rate = 34%
 # hash-table stats:
-# Load=49/8192=1%, Rehash=0, Collisions=0/75=0%
-# Finished Make data base on Mon Aug 08 09:59:52 2022
+# Load=50/8192=1%, Rehash=0, Collisions=0/76=0%
+# Finished Make data base on Tue Aug 09 14:01:51 2022
 
  
