@@ -85,12 +85,17 @@ class AppointmentsController < ApplicationController
 
     finder = patients.select { |patient|  patient["name"] == params[:patient_name]}
 
-    appointment = Appointment.new(doctor_id: params[:doctor_id], patient_id: finder[0]["id"], start_time: params[:start_time], duration_in_minutes: params[:duration_in_minutes])
-    
-    if appointment.save
-      render json: appointment, status: :created
-    else
-      render json: appointment.errors, status: :unproccessable_entity
+    #assuming since each patient can only have one doctor I added this validation to make sure the proper doctor_id is inserted
+    if finder[0]["doctor_id"] == params[:doctor_id]
+        appointment = Appointment.new(doctor_id: params[:doctor_id], patient_id: finder[0]["id"], start_time: params[:start_time], duration_in_minutes: params[:duration_in_minutes])
+
+        if appointment.save
+          render json: appointment, status: :created
+        else
+          render json: appointment.errors, status: :unproccessable_entity
+        end
+    else 
+        render json: {"Error" => "Invalid Doctor ID, please insert the correct ID"}
     end
   end
 
