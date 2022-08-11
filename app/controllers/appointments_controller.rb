@@ -56,9 +56,19 @@ class AppointmentsController < ApplicationController
   def doctors_with_no_appointments
     current_datetime = DateTime.now
 
-    result_for_appointments = ActiveRecord::Base.connection.execute("SELECT DISTINCT name from doctors JOIN appointments ON appointments.doctor_id = doctors.id WHERE appointments.start_time < '#{current_datetime}' ")
+    result_for_all_doctors = Doctor.all
+    result_for_all_doctors_with_no_appointments = []
+    result_for_doctors_with_appointments = ActiveRecord::Base.connection.execute("SELECT DISTINCT name from doctors JOIN appointments ON appointments.doctor_id = doctors.id WHERE appointments.start_time > '#{current_datetime}' ")
 
-    render json: result_for_appointments
+    result_for_all_doctors.each do |one_doctor_in_all|
+      result_for_doctors_with_appointments.each do |one_doctor_in_all_with_appointments|
+        if one_doctor_in_all["name"] == one_doctor_in_all_with_appointments["name"]
+          result_for_all_doctors_with_no_appointments.push({"name" => one_doctor_in_all["name"]})
+        end
+      end
+    end
+
+    render json: result_for_all_doctors_with_no_appointments
   end
   
 
