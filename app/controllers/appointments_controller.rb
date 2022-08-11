@@ -1,12 +1,11 @@
 require 'date'
 class AppointmentsController < ApplicationController
   def appointments
-    results_for_appointments = ActiveRecord::Base.connection.execute(
-      "SELECT appointments.id , doctors.name as doctor , appointments.doctor_id, appointments.patient_id, patients.name as patient, appointments.created_at, appointments.start_time, appointments.duration_in_minutes FROM appointments 
-      JOIN doctors ON doctors.id = appointments.doctor_id
-      JOIN patients ON patients.id = appointments.patient_id; ")
+    results_for_appointments = Appointment.select("appointments.id" , "doctors.name as doctor" , "appointments.doctor_id", "appointments.patient_id", "patients.name as patient", "appointments.created_at", "appointments.start_time", "appointments.duration_in_minutes").joins("JOIN doctors ON doctors.id = appointments.doctor_id").joins("JOIN patients ON patients.id = appointments.patient_id")
 
-      
+    if results_for_appointments.blank?
+      render json: {"Message" => "There are no appointments currently in the database"}
+    else
       all_appointments = results_for_appointments.map { |obj|
         { 
           "id" => obj["id"],
@@ -51,6 +50,7 @@ class AppointmentsController < ApplicationController
 
         render json: all_appointments
       end
+    end
   end
 
   def doctors_with_no_appointments
@@ -96,4 +96,43 @@ class AppointmentsController < ApplicationController
   end
 end
 
+# {
+#   "id": 4012,
+#   "patient": {
+#       "name": "Mary"
+#   },
+#   "doctor": {
+#       "name": "Alberto",
+#       "id": 31
+#   },
+#   "created_at": "2022-08-10T23:56:21.069Z",
+#   "start_time": "2024-05-11T06:10:08.000Z",
+#   "duration_in_minutes": 41
+# },
+# {
+#   "id": 4013,
+#   "patient": {
+#       "name": "Mary"
+#   },
+#   "doctor": {
+#       "name": "Alberto",
+#       "id": 31
+#   },
+#   "created_at": "2022-08-11T00:35:10.155Z",
+#   "start_time": "2024-05-11T06:10:08.000Z",
+#   "duration_in_minutes": 41
+# },
+# {
+#   "id": 4014,
+#   "patient": {
+#       "name": "Mary"
+#   },
+#   "doctor": {
+#       "name": "Alberto",
+#       "id": 31
+#   },
+#   "created_at": "2022-08-11T03:57:53.860Z",
+#   "start_time": "2024-05-11T06:10:08.000Z",
+#   "duration_in_minutes": 41
+# },
 
