@@ -54,24 +54,20 @@ class AppointmentsController < ApplicationController
   end
 
   def doctors_with_no_appointments
+    #I made this function the find all doctors with NO FUTURE appointments
     current_datetime = DateTime.now
 
-    result_for_all_doctors = Doctor.all
-    result_for_all_doctors_with_no_appointments = []
-    result_for_doctors_with_appointments = ActiveRecord::Base.connection.execute("SELECT DISTINCT name from doctors JOIN appointments ON appointments.doctor_id = doctors.id WHERE appointments.start_time > '#{current_datetime}' ")
+    result_for_doctors_id_with_appointments = Doctor.select(:id).joins("JOIN appointments ON appointments.doctor_id = doctors.id WHERE appointments.start_time > '#{current_datetime}'").distinct
+    if result_for_doctors_id_with_appointments.blank?
+      render json: Doctor.all
+    else
+      doctors_id_hash_into_array = result_for_doctors_id_with_appointments.map { |doctor_hash| doctor_hash["id"]}
+      result_for_all_doctors_with_no_appointments = Doctor.where.not(id: doctors_id_hash_into_array)
 
-    result_for_all_doctors.each do |one_doctor_in_all|
-      result_for_doctors_with_appointments.each do |one_doctor_in_all_with_appointments|
-        if one_doctor_in_all["name"] == one_doctor_in_all_with_appointments["name"]
-          result_for_all_doctors_with_no_appointments.push({"name" => one_doctor_in_all["name"]})
-        end
-      end
+      render json: result_for_all_doctors_with_no_appointments
     end
-
-    render json: result_for_all_doctors_with_no_appointments
   end
   
-
   def create_appointment 
     current_patient = Patient.find_by_name(params[:patient_name])
 

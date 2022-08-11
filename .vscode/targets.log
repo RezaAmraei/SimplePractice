@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Aug 10 09:18:26 2022
+# Make data base, printed on Thu Aug 11 10:32:26 2022
 
 # Variables
 
@@ -41,7 +41,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_24180_XWIUCXFNDYJFPAEU
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_29548_CDUGTUPWJANURTPZ
 # environment
 VS160COMCOMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\
 # environment
@@ -57,7 +57,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\Amrae\AppData\Roaming\Code\CachedData\da76f93349a72022ca4670c1b84860304616aaa2
+VSCODE_CODE_CACHE_PATH = C:\Users\Amrae\AppData\Roaming\Code\CachedData\6d9b74a70ca9c7733b29f0456fd8195364076dda
 # environment
 LANG = C
 # default
@@ -93,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 24180
+VSCODE_PID = 29548
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -162,6 +162,8 @@ USERDOMAIN = DESKTOP-FA3LCK0
 GNUMAKEFLAGS := 
 # environment
 OS = Windows_NT
+# environment
+__COMPAT_LAYER = DetectorsAppHealth
 # makefile
 .DEFAULT_GOAL := default
 # default
@@ -189,7 +191,7 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 TEMP = C:\Users\Amrae\AppData\Local\Temp
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\5f77c788f47e45c502de355d8552c6c7-1.70.0-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\5f77c788f47e45c502de355d8552c6c7-1.70.1-main-sock
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -207,7 +209,7 @@ PROCESSOR_REVISION = 2100
 # environment
 PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # variable set hash-table stats:
-# Load=97/1024=9%, Rehash=0, Collisions=12/125=10%
+# Load=98/1024=10%, Rehash=0, Collisions=12/126=10%
 
 # Pattern-specific Variable Values
 
@@ -391,6 +393,6 @@ chown:
 # strcache performance: lookups = 76 / hit rate = 34%
 # hash-table stats:
 # Load=50/8192=1%, Rehash=0, Collisions=0/76=0%
-# Finished Make data base on Wed Aug 10 09:18:26 2022
+# Finished Make data base on Thu Aug 11 10:32:26 2022
 
  
