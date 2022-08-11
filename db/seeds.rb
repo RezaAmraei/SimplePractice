@@ -29,7 +29,8 @@ for i in 1..10
                     {
                         doctor_id: doctor.id,
                         patient_id: patient.id,
-                        start_time: Faker::Time.forward
+                        start_time: Faker::Time.forward,
+                        duration_in_minutes: 50
                     }
                 )
             else
@@ -37,7 +38,8 @@ for i in 1..10
                     {
                         doctor_id: doctor.id,
                         patient_id: patient.id,
-                        start_time: Faker::Time.backward
+                        start_time: Faker::Time.backward,
+                        duration_in_minutes: 50
                     }
                 )
             end

@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Aug 11 10:32:26 2022
+# Make data base, printed on Thu Aug 11 13:33:00 2022
 
 # Variables
 
@@ -41,7 +41,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_29548_CDUGTUPWJANURTPZ
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_58516_LQKRWPPAXBRYQOXT
 # environment
 VS160COMCOMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\
 # environment
@@ -93,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 29548
+VSCODE_PID = 58516
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -162,8 +162,6 @@ USERDOMAIN = DESKTOP-FA3LCK0
 GNUMAKEFLAGS := 
 # environment
 OS = Windows_NT
-# environment
-__COMPAT_LAYER = DetectorsAppHealth
 # makefile
 .DEFAULT_GOAL := default
 # default
@@ -209,7 +207,7 @@ PROCESSOR_REVISION = 2100
 # environment
 PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # variable set hash-table stats:
-# Load=98/1024=10%, Rehash=0, Collisions=12/126=10%
+# Load=97/1024=9%, Rehash=0, Collisions=12/125=10%
 
 # Pattern-specific Variable Values
 
@@ -393,6 +391,6 @@ chown:
 # strcache performance: lookups = 76 / hit rate = 34%
 # hash-table stats:
 # Load=50/8192=1%, Rehash=0, Collisions=0/76=0%
-# Finished Make data base on Thu Aug 11 10:32:26 2022
+# Finished Make data base on Thu Aug 11 13:33:00 2022
 
  
