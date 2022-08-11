@@ -1,4 +1,4 @@
-
+require 'date'
 class AppointmentsController < ApplicationController
   def appointments
     results_for_appointments = ActiveRecord::Base.connection.execute(
@@ -54,48 +54,32 @@ class AppointmentsController < ApplicationController
   end
 
   def doctors_with_no_appointments
-    results_for_doctor_appointments = ActiveRecord::Base.connection.execute(
-      "SELECT appointments.id , doctors.name as doctor , appointments.doctor_id,  appointments.start_time, appointments.duration_in_minutes FROM appointments 
-      JOIN doctors ON doctors.id = appointments.doctor_id; ")
+    current_datetime = DateTime.now
 
-    doctors_names = ActiveRecord::Base.connection.execute("SELECT name from doctors")
-    
-    hash_of_array_of_appointments = {}
-    hash_of_doctors_with_no_appointments = {}
+    result_for_appointments = ActiveRecord::Base.connection.execute("SELECT DISTINCT name from doctors JOIN appointments ON appointments.doctor_id = doctors.id WHERE appointments.start_time < '#{current_datetime}' ")
 
-    doctors_names.map {|doctor| hash_of_array_of_appointments.merge!("#{doctor["name"]}"=> [])}
-
-    results_for_doctor_appointments.each { |appointment| 
-      if appointment["start_time"].to_f > DateTime.now.to_f
-        hash_of_array_of_appointments[appointment["doctor"]].push(appointment["start_time"])
-      end
-    }
-
-    hash_of_array_of_appointments.each do |doctor, appointments|
-      if appointments.length == 0
-        hash_of_doctors_with_no_appointments.merge!(doctor.to_s => "No appointments!")
-      end
-    end
-      render json: hash_of_doctors_with_no_appointments
+    render json: result_for_appointments
   end
   
 
   def create_appointment 
-    patients = Patient.all
+    current_patient = Patient.find_by_name(params[:patient_name])
 
-    finder = patients.select { |patient|  patient["name"] == params[:patient_name]}
+    if current_patient.blank?
+      render json: {"error" => "This patient does not exist, check spelling or make sure patient is registered"}
+    else
+      #assuming since each patient can only have one doctor I added this validation to make sure the proper doctor_id is inserted
+      if current_patient["doctor_id"].to_i == params[:doctor_id]
+        appointment = Appointment.new(doctor_id: params[:doctor_id], patient_id: current_patient["id"].to_i, start_time: params[:start_time], duration_in_minutes: params[:duration_in_minutes])
 
-    #assuming since each patient can only have one doctor I added this validation to make sure the proper doctor_id is inserted
-    if finder[0]["doctor_id"] == params[:doctor_id]
-        appointment = Appointment.new(doctor_id: params[:doctor_id], patient_id: finder[0]["id"], start_time: params[:start_time], duration_in_minutes: params[:duration_in_minutes])
-
-        if appointment.save
-          render json: appointment, status: :created
-        else
-          render json: appointment.errors, status: :unproccessable_entity
+          if appointment.save
+            render json: appointment, status: :created
+          else
+            render json: appointment.errors, status: :unproccessable_entity
         end
-    else 
+      else 
         render json: {"Error" => "Invalid Doctor ID, please insert the correct ID"}
+      end
     end
   end
 

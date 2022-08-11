@@ -6,6 +6,7 @@
 require 'faker'
 Doctor.destroy_all
 Patient.destroy_all
+Appointment.destroy_all
 
 for i in 1..10
     doctor = Doctor.create!(
@@ -28,7 +29,7 @@ for i in 1..10
                     {
                         doctor_id: doctor.id,
                         patient_id: patient.id,
-                        start_time: Faker::Time.forward
+                        start_time: Faker::Time.backward
                     }
                 )
             else
